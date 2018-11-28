@@ -1,0 +1,49 @@
+name:                aartc
+version:             0.1.0.0
+github:              "CrumbleWorks/aerial-artillery-range-table-calculator"
+license:             MIT
+author:              "M. Stocker & P. Bächli"
+maintainer:          ""
+copyright:           "2018 M. Stocker & P. Bächli"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/CrumbleWorks/aerial-artillery-range-table-calculator#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- pptable
+
+library:
+  source-dirs: src
+
+executables:
+  aartc-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aartc
+
+tests:
+  aartc-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - aartc
