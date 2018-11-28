@@ -7,4 +7,4 @@ See https://docs.haskellstack.org/en/stable/install_and_upgrade/.
 Run `stack install` in repository.
 
 # Run
-Execute `stack exec aartc-exe`
+Execute `stack build` `stack exec aartc-exe`
