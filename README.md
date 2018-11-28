@@ -1,3 +1,7 @@
+# Material
+
+https://en.wikipedia.org/wiki/Projectile_motion
+
 # Setup
 
 ## Install Stack
