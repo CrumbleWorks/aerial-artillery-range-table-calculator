@@ -1,24 +1,24 @@
-{-# LANGUAGE MultiParamTypeClasses#-}
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveDataTypeable    #-}
+{-# LANGUAGE DeriveGeneric         #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 
-import Data.Data
-import qualified GHC.Generics as G
+import           Data.Data
+import qualified GHC.Generics              as G
 import qualified Text.PrettyPrint.Tabulate as T
 
 data RangeInfo = RangeInfo
-    { time_ :: Integer
-    , angle_ :: Integer
+    { time_     :: Integer
+    , angle_    :: Integer
     , velocity_ :: Float
-    , range_ :: Float
+    , range_    :: Float
     } deriving (Data, G.Generic, Show)
 instance T.Tabulate RangeInfo T.DoNotExpandWhenNested
 
 timeOfFlight :: Integer -> Float -> Float -> Float
-timeOfFlight angle velocity range = range / (velocity * (cos $ fromIntegral angle))
+timeOfFlight angle velocity range = range / (velocity * cos (fromIntegral angle))
 
 distance :: Integer -> Float -> Integer -> Float
-distance angle velocity time = velocity * (fromInteger time) * (cos $ fromIntegral angle)
+distance angle velocity time = velocity * fromInteger time * cos (fromIntegral angle)
 
 rangeInfo :: Integer -> Float -> Integer -> RangeInfo
 rangeInfo angle velocity time = do
@@ -36,7 +36,7 @@ main = do
 
     let velocity = 800
     let angle = 20
-    let measurements = [measurement | measurement <- [30,31..120]]
+    let measurements = [30, 31 .. 120]
 
     let rangeInfos = map (rangeInfo angle velocity) measurements
 
