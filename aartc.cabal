@@ -1,8 +1,10 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4bda9c28d8d1f74e74a24f5661f6354099e6bd5aa60338a87e613be20408303a
+-- hash: ef7151b892189fe3276e51dff2b28bb790e8f4e68b5e8534ba828731c2780897
 
 name:           aartc
 version:        0.1.0.0
@@ -14,10 +16,9 @@ copyright:      2018 M. Stocker & P. Bächli
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
@@ -25,13 +26,15 @@ source-repository head
 
 library
   exposed-modules:
+      LatexGenerator
       Lib
   other-modules:
       Paths_aartc
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      HaTeX
+    , base >=4.7 && <5
     , pptable
   default-language: Haskell2010
 
@@ -43,7 +46,8 @@ executable aartc-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aartc
+      HaTeX
+    , aartc
     , base >=4.7 && <5
     , pptable
   default-language: Haskell2010
@@ -57,7 +61,8 @@ test-suite aartc-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aartc
+      HaTeX
+    , aartc
     , base >=4.7 && <5
     , pptable
   default-language: Haskell2010
