@@ -2,6 +2,7 @@
 
 import           Data.Data
 import qualified GHC.Generics              as G
+import           LatexGenerator
 import           RangeTableCalculator
 import qualified Text.PrettyPrint.Tabulate as T
 
@@ -14,6 +15,8 @@ main = do
     let measurements = [30, 31 .. 40]
 
     let rangeInfos = map (rangeInfo angle velocity) measurements
+
+    renderDocument "output/test.tex" $ rangeTable rangeInfos
 
     {-let d1 = distance 20 800 60
     putStrLn $ (show d1) ++ "m"
