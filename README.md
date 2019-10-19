@@ -8,6 +8,7 @@ https://worldbuilding.stackexchange.com/questions/130432/how-to-correct-aim-in-a
 
 ## Install Stack
 For Windows install the `haskell-stack`-package from Chocolatey: https://chocolatey.org/packages/haskell-stack
+
 For other platforms see https://docs.haskellstack.org/en/stable/install_and_upgrade/.
 
 ## Install GHC (and dependencies)
