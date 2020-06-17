@@ -17,6 +17,18 @@
  * Naval Gunfire Characteristics: https://fas.org/man/dod-101/sys/ship/weaps/gunfire-table.gif
  * Skoda Guns on Austrian Waship: http://www.navweaps.com/Weapons/WNAust_12-45.php
 
+## Rangetable Design
+ * https://archive.org/details/gunneryexplosive00unitrich/page/74/mode/2up
+   * https://upload.wikimedia.org/wikipedia/commons/a/ae/US_3_inch_field_gun_range_tables_1917.jpeg
+
+Werte die berechnet werden sollen (reines Datenset, weiterverarbeitung für Darstellung offen):
+
+| Range | Muzzle Velocity | Angle of Elevation (milliradsekunden) | Korrekturwerte? (manual, punkt 17ff) | DeltaX für Wind | DeltaX für Drift | Time of Flight | Terminal velocity | Maximum Ordinate (Zenith) |
+|---|---|---|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |   |   |
+
+# Code
+
 ## Setup
 
 ### Install Stack
