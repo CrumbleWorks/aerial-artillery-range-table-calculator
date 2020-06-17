@@ -37,16 +37,9 @@ cos' degrees = cos $ radians degrees
 timeOfFlight :: Double -> Double -> Double -> Double
 timeOfFlight angle velocity range = range / (velocity * cos' angle)
 
--- | Calculates the maximum horizontal distance a projectile can fly with a given firing angle and initial velocity.
-maxHorizontalDistance :: Double -> Double -> Double
-maxHorizontalDistance angle velocity = velocity ^ 2 * sin' (2 * angle) / g
-
 -- | Calculates the horizontal distance flown by a projectile with a given firing angle, initial velocity and time passed.
 horizontalDistance :: Double -> Double -> Integer -> Double
-horizontalDistance angle velocity time = do
-    let maxDistance = maxHorizontalDistance angle velocity
-    let distance = velocity * fromInteger time * cos' angle
-    min maxDistance distance
+horizontalDistance angle velocity time = velocity * fromInteger time * cos' angle
 
 -- | Calculates range information for tracer rounds / projectiles (i.e. horizontal distances).
 tracerRangeInfo :: Double -> Double -> Integer -> TracerRangeInfo
