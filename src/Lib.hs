@@ -13,28 +13,42 @@ import qualified Text.PrettyPrint.Tabulate as T
 
 data RangeInfo = RangeInfo
     { time_     :: Integer
-    , angle_    :: Integer
+    , angle_    :: Float
     , velocity_ :: Float
     , range_    :: Float
     } deriving (Data, G.Generic, Show)
+
+-- | Acceleration of gravity
+g :: Float
+g = 9.80665
 
 -- | Converts from degrees to radians.
 radians :: Float -> Float
 radians degrees = degrees * (pi / 180)
 
+-- | Calculates the sine of an angle in degrees.
+sin' :: Float -> Float
+sin' degrees = sin $ radians degrees
+
 -- | Calculates the cosine of an angle in degrees.
 cos' :: Float -> Float
 cos' degrees = cos $ radians degrees
 
-timeOfFlight :: Integer -> Float -> Float -> Float
-timeOfFlight angle velocity range = range / (velocity * cos (fromIntegral angle))
+timeOfFlight :: Float -> Float -> Float -> Float
+timeOfFlight angle velocity range = range / (velocity * cos' angle)
 
-distance :: Integer -> Float -> Integer -> Float
-distance angle velocity time = velocity * fromInteger time * cos' (fromIntegral angle)
+maxHorizontalDistance :: Float -> Float -> Float
+maxHorizontalDistance angle velocity = velocity ^ 2 * sin' (2 * angle) / g
 
-rangeInfo :: Integer -> Float -> Integer -> RangeInfo
+horizontalDistance :: Float -> Float -> Integer -> Float
+horizontalDistance angle velocity time = do
+    let maxDistance = maxHorizontalDistance angle velocity
+    let distance = velocity * fromInteger time * cos' angle
+    min maxDistance distance
+
+rangeInfo :: Float -> Float -> Integer -> RangeInfo
 rangeInfo angle velocity time = do
-    let shellRange = distance angle velocity time
+    let shellRange = horizontalDistance angle velocity time
     RangeInfo {
         time_ = time,
         angle_ = angle,
