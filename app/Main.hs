@@ -3,7 +3,7 @@
 import           Lib
 import qualified Text.PrettyPrint.Tabulate as T
 
-instance T.Tabulate RangeInfo T.DoNotExpandWhenNested
+instance T.Tabulate TracerRangeInfo T.DoNotExpandWhenNested
 
 main :: IO ()
 main = do
@@ -11,6 +11,6 @@ main = do
     let angle = 20
     let measurements = [5,10..60]
 
-    let rangeInfos = map (rangeInfo angle velocity) measurements
+    let rangeInfos = map (tracerRangeInfo angle velocity) measurements
 
     T.printTable rangeInfos

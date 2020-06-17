@@ -3,19 +3,19 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module Lib
-    ( RangeInfo(..)
-    , rangeInfo
+    ( TracerRangeInfo(..)
+    , tracerRangeInfo
     ) where
 
 import           Data.Data
 import qualified GHC.Generics              as G
 import qualified Text.PrettyPrint.Tabulate as T
 
-data RangeInfo = RangeInfo
-    { time_     :: Integer
-    , angle_    :: Double
-    , velocity_ :: Double
-    , range_    :: Double
+data TracerRangeInfo = TracerRangeInfo
+    { time_        :: Integer
+    , firingAngle_ :: Double
+    , velocity_    :: Double
+    , range_       :: Double
     } deriving (Data, G.Generic, Show)
 
 -- | Acceleration of gravity
@@ -37,21 +37,24 @@ cos' degrees = cos $ radians degrees
 timeOfFlight :: Double -> Double -> Double -> Double
 timeOfFlight angle velocity range = range / (velocity * cos' angle)
 
+-- | Calculates the maximum horizontal distance a projectile can fly with a given firing angle and initial velocity.
 maxHorizontalDistance :: Double -> Double -> Double
 maxHorizontalDistance angle velocity = velocity ^ 2 * sin' (2 * angle) / g
 
+-- | Calculates the horizontal distance flown by a projectile with a given firing angle, initial velocity and time passed.
 horizontalDistance :: Double -> Double -> Integer -> Double
 horizontalDistance angle velocity time = do
     let maxDistance = maxHorizontalDistance angle velocity
     let distance = velocity * fromInteger time * cos' angle
     min maxDistance distance
 
-rangeInfo :: Double -> Double -> Integer -> RangeInfo
-rangeInfo angle velocity time = do
+-- | Calculates range information for tracer rounds / projectiles (i.e. horizontal distances).
+tracerRangeInfo :: Double -> Double -> Integer -> TracerRangeInfo
+tracerRangeInfo angle velocity time = do
     let shellRange = horizontalDistance angle velocity time
-    RangeInfo {
+    TracerRangeInfo {
         time_ = time,
-        angle_ = angle,
+        firingAngle_ = angle,
         velocity_ = velocity,
         range_ = shellRange
     }
