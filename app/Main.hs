@@ -11,6 +11,6 @@ main = do
     let angle = 20
     let measurements = [5,10..60]
 
-    let rangeInfos = map (tracerRangeInfo angle velocity) measurements
+    let rangeInfos = tracerRangeInfo' angle velocity measurements
 
     T.printTable rangeInfos

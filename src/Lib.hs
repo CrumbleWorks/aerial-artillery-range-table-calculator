@@ -5,6 +5,7 @@
 module Lib
     ( TracerRangeInfo(..)
     , tracerRangeInfo
+    , tracerRangeInfo'
     ) where
 
 import           Data.Data
@@ -41,7 +42,7 @@ timeOfFlight angle velocity range = range / (velocity * cos' angle)
 horizontalDistance :: Double -> Double -> Integer -> Double
 horizontalDistance angle velocity time = velocity * fromInteger time * cos' angle
 
--- | Calculates range information for tracer rounds / projectiles (i.e. horizontal distances).
+-- | Calculates range information (i.e. horizontal distance) for one tracer round / projectile.
 tracerRangeInfo :: Double -> Double -> Integer -> TracerRangeInfo
 tracerRangeInfo angle velocity time = do
     let shellRange = horizontalDistance angle velocity time
@@ -51,3 +52,6 @@ tracerRangeInfo angle velocity time = do
         velocity_ = velocity,
         range_ = shellRange
     }
+
+tracerRangeInfo' :: Double -> Double -> [Integer] -> [TracerRangeInfo]
+tracerRangeInfo' angle velocity = map (tracerRangeInfo angle velocity)
